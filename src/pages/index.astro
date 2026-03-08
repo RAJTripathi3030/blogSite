@@ -1,8 +1,8 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 ---
 
 <!doctype html>
@@ -11,39 +11,134 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
+		<div class="site-container">
+			<Header />
+
+			<main>
+				<!-- Hero Section -->
+				<div class="grid hero-grid">
+					<div class="box hero-text">
+						<h1>
+							<span
+								style="background: linear-gradient(135deg, #FF2D2D, #C0001A); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
+								>7 minutes...7 minutes is all I can spare to
+								play with you.</span
+							>
+							<span
+								style="background: linear-gradient(135deg, #B00020, #5C0010); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
+								>Here I am giving you my precious time, and you
+								waste it by walking around.</span
+							>
+						</h1>
+					</div>
+
+					<div class="box hero-image-box">
+						<img
+							src="https://upload.wikimedia.org/wikipedia/en/5/51/Albert_Wesker.png"
+							alt="wesker"
+							style="width:100%; height: 100%; object-fit: cover; border-radius: 0;"
+						/>
+					</div>
+				</div>
+
+				<!-- Second Section -->
+				<div class="grid second-grid">
+					<div class="box">
+						<h1>Here are some of my thoughts...</h1>
+					</div>
+
+					<div class="feature-grid">
+						<div class="feature-card">
+							<h3>Writing to think</h3>
+							<p>
+								I write to untangle complex ideas and make sense
+								of the world around me.
+							</p>
+						</div>
+						<div class="feature-card">
+							<h3>Building in the open</h3>
+							<p>
+								Check out my <a
+									href="https://www.github.com/RAJTripathi3030/"
+									>GitHub</a
+								> to see what I've been building.
+							</p>
+						</div>
+						<div class="feature-card">
+							<h3>Moving fast</h3>
+							<p>
+								I believe in shipping, iterating, and learning
+								by doing rather than planning forever.
+							</p>
+						</div>
+						<div class="feature-card">
+							<h3>Using the best tool</h3>
+							<p>
+								I pick the right stack for the problem — no
+								dogma, just pragmatism.
+							</p>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<Footer />
+		</div>
 	</body>
 </html>
+
+<style>
+	.hero-grid {
+		min-height: 280px;
+	}
+
+	.hero-text {
+		display: flex;
+		align-items: center;
+	}
+
+	.hero-image-box {
+		padding: 0;
+		overflow: hidden;
+	}
+
+	.second-grid {
+		border-top: 1px solid var(--border-color);
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.second-grid .box {
+		display: flex;
+		align-items: center;
+	}
+
+	/* ── Tablet (≤ 900px) ── */
+	@media (max-width: 900px) {
+		.hero-image-box {
+			max-height: 320px;
+		}
+
+		.second-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* ── Mobile (≤ 600px) ── */
+	@media (max-width: 600px) {
+		.hero-grid {
+			min-height: unset;
+		}
+
+		.hero-text {
+			padding: 1.25rem 1rem;
+		}
+
+		.hero-image-box {
+			max-height: 220px;
+		}
+
+		.second-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

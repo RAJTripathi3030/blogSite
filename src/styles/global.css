@@ -1,21 +1,24 @@
 /*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+  Guardian-style dark theme for blog site.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Guardian+Egyp+Web&family=Inter:wght@400;700;900&display=swap');
 
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
+	--accent: #f3c900;
+	--accent-dark: #c9a800;
+	--black: 255, 255, 255;
+	--gray: 160, 170, 185;
+	--gray-light: 50, 52, 60;
+	--gray-dark: 220, 222, 228;
+	--bg-dark: #0e0e0e;
+	--bg-card: #252525;
+	--bg-navbar: #111111;
+	--border-color: #2e2e2e;
 	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px
-		rgba(var(--gray), 33%);
+		0 2px 6px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.7), 0 16px 32px rgba(0, 0, 0, 0.5);
 }
+
 @font-face {
 	font-family: "Atkinson";
 	src: url("/fonts/atkinson-regular.woff") format("woff");
@@ -23,6 +26,7 @@
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson";
 	src: url("/fonts/atkinson-bold.woff") format("woff");
@@ -30,25 +34,148 @@
 	font-style: normal;
 	font-display: swap;
 }
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+	min-width: 320px;
+}
+
+html,
 body {
-	font-family: "Atkinson", sans-serif;
 	margin: 0;
 	padding: 0;
+	background-color: var(--bg-dark);
+}
+
+body {
+	font-family: "Inter", "Atkinson", sans-serif;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
+	background-color: var(--bg-dark);
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 1.7;
+	width: 100%;
 }
+
+/* ── Navbar ─────────────────────────────────────── */
+.navbar {
+	display: flex;
+	align-items: stretch;
+	gap: 0;
+	background-color: var(--bg-navbar);
+	border-bottom: 3px solid var(--accent);
+	padding: 0 1.5rem;
+	height: 50px;
+}
+
+.page-link {
+	display: flex;
+	align-items: center;
+	padding: 0 1rem;
+	height: 100%;
+	color: rgb(210, 212, 218);
+	text-decoration: none;
+	font-size: 0.88rem;
+	font-weight: 500;
+	letter-spacing: 0.02em;
+	border-bottom: 3px solid transparent;
+	margin-bottom: -3px;
+	/* sit on top of navbar border */
+	transition: color 0.15s ease, border-color 0.15s ease;
+	white-space: nowrap;
+}
+
+.page-link:hover {
+	color: #ffffff;
+	border-bottom-color: rgba(243, 201, 0, 0.5);
+}
+
+.page-link.active {
+	color: #ffffff;
+	background-color: var(--accent);
+	border-bottom-color: var(--accent);
+	font-weight: 700;
+}
+
+/* ── Site Container ──────────────────────────────── */
+.site-container {
+	max-width: 1140px;
+	margin: 0 auto;
+	background-color: var(--bg-dark);
+	border-left: 1px solid var(--border-color);
+	border-right: 1px solid var(--border-color);
+	min-height: 100vh;
+}
+
+/* ── Grid Layout ─────────────────────────────────── */
+.grid {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	border-top: 1px solid var(--border-color);
+}
+
+/* ── Box / Card ──────────────────────────────────── */
+.box {
+	padding: 2.5rem 2rem;
+	background-color: var(--bg-dark);
+	border-right: 1px solid var(--border-color);
+}
+
+.box:last-child {
+	border-right: none;
+}
+
+/* feature-card style (mirroring the right-column cards in the screenshot) */
+.feature-card {
+	background-color: var(--bg-card);
+	padding: 1.2rem 1.4rem;
+	border-bottom: 1px solid #3a3a3a;
+}
+
+.feature-card:last-child {
+	border-bottom: none;
+}
+
+.feature-card h3 {
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: #ffffff;
+	margin: 0 0 0.4rem 0;
+}
+
+.feature-card p {
+	font-size: 0.85rem;
+	color: rgb(var(--gray));
+	margin: 0;
+	line-height: 1.5;
+}
+
+.feature-card a {
+	color: var(--accent);
+}
+
+/* ── Feature Grid (2×2 for right column) ─────────── */
+.feature-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+/* ── Main Content ────────────────────────────────── */
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
 }
+
+/* ── Typography ──────────────────────────────────── */
 h1,
 h2,
 h3,
@@ -57,85 +184,239 @@ h5,
 h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
-	line-height: 1.2;
+	line-height: 1.15;
+	font-weight: 900;
 }
+
 h1 {
-	font-size: 3.052em;
+	font-size: 2.6rem;
+	letter-spacing: -0.02em;
 }
+
 h2 {
-	font-size: 2.441em;
+	font-size: 2rem;
 }
+
 h3 {
-	font-size: 1.953em;
+	font-size: 1.5rem;
 }
+
 h4 {
-	font-size: 1.563em;
+	font-size: 1.25rem;
 }
+
 h5 {
-	font-size: 1.25em;
+	font-size: 1.1rem;
 }
+
 strong,
 b {
 	font-weight: 700;
 }
+
 a {
 	color: var(--accent);
 }
+
 a:hover {
-	color: var(--accent);
+	color: var(--accent-dark);
 }
+
 p {
 	margin-bottom: 1em;
 }
+
 .prose p {
 	margin-bottom: 2em;
 }
+
+/* ── Form Elements ───────────────────────────────── */
 textarea {
 	width: 100%;
 	font-size: 16px;
+	background-color: var(--bg-card);
+	color: rgb(var(--gray-dark));
+	border: 1px solid var(--border-color);
+	border-radius: 4px;
 }
+
 input {
 	font-size: 16px;
+	background-color: var(--bg-card);
+	color: rgb(var(--gray-dark));
+	border: 1px solid var(--border-color);
 }
+
+/* ── Media ───────────────────────────────────────── */
 table {
 	width: 100%;
 }
+
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
+	border-radius: 0;
+	display: block;
 }
+
+/* ── Code ────────────────────────────────────────── */
 code {
 	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
+	background-color: rgba(var(--gray-light), 0.6);
 	border-radius: 2px;
+	color: var(--accent);
+	font-size: 0.9em;
 }
+
 pre {
 	padding: 1.5em;
 	border-radius: 8px;
+	background-color: var(--bg-card) !important;
+	border: 1px solid var(--border-color);
 }
-pre > code {
+
+pre>code {
 	all: unset;
+	color: rgb(var(--gray-dark));
 }
+
+/* ── Blockquote ──────────────────────────────────── */
 blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
 	margin: 0;
-	font-size: 1.333em;
+	font-size: 1.2em;
+	color: rgb(var(--gray));
 }
+
 hr {
 	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+	border-top: 1px solid var(--border-color);
 }
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
+
+/* ── Footer ──────────────────────────────────────── */
+footer {
+	padding: 1.5rem 2rem;
+	background-color: var(--bg-navbar);
+	color: rgb(var(--gray));
+	font-size: 0.85rem;
+	border-top: 1px solid var(--border-color);
+}
+
+/* ── Blog Post specific ────────────────────────── */
+.blog-container {
+	max-width: 1140px;
+	margin: 0 auto;
+	padding: 2rem;
+}
+
+/* ── Responsive ──────────────────────────────────── */
+
+/* ── Tablet (≤ 900px) ──────────────────────────── */
+@media (max-width: 900px) {
+	.site-container {
+		border-left: none;
+		border-right: none;
 	}
-	main {
-		padding: 1em;
+
+	.grid {
+		grid-template-columns: 1fr;
+	}
+
+	.feature-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.box {
+		border-right: none;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	h1 {
+		font-size: 2.2rem;
+	}
+
+	.blog-container {
+		padding: 1.5rem;
 	}
 }
 
+/* ── Mobile (≤ 600px) ──────────────────────────── */
+@media (max-width: 600px) {
+	body {
+		font-size: 16px;
+	}
+
+	/* Navbar: allow horizontal scroll rather than overflow clipping */
+	.navbar {
+		padding: 0 0.75rem;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none; /* Firefox */
+	}
+	.navbar::-webkit-scrollbar {
+		display: none; /* Chrome/Safari */
+	}
+
+	.page-link {
+		padding: 0 0.65rem;
+		font-size: 0.82rem;
+		white-space: nowrap;
+	}
+
+	.grid {
+		grid-template-columns: 1fr;
+	}
+
+	.feature-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.box {
+		padding: 1.5rem 1rem;
+		border-right: none;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	h1 {
+		font-size: 1.75rem;
+	}
+
+	h2 {
+		font-size: 1.4rem;
+	}
+
+	h3 {
+		font-size: 1.15rem;
+	}
+
+	.blog-container {
+		padding: 1rem;
+	}
+
+	footer {
+		padding: 1rem;
+		font-size: 0.8rem;
+	}
+}
+
+/* ── Small phones (≤ 400px) ────────────────────── */
+@media (max-width: 400px) {
+	h1 {
+		font-size: 1.45rem;
+	}
+
+	.box {
+		padding: 1.2rem 0.75rem;
+	}
+
+	.page-link {
+		padding: 0 0.5rem;
+		font-size: 0.78rem;
+	}
+}
+
+/* ── Accessibility ───────────────────────────────── */
 .sr-only {
 	border: 0;
 	padding: 0;
@@ -144,12 +425,8 @@ hr {
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
 	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
 	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
 	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }

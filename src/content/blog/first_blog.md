@@ -2,7 +2,7 @@
 title: 'Life Cycle of "hello.c"'
 description: 'Here I describe how a simple c program starts its journey from the code editor and reaches its final place of rest i.e the main memory'
 pubDate: 'Mar 06 2026'
-heroImage: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+heroImage: 'https://unsplash.com/photos/vintage-gray-game-console-and-joystick-p0j-mE6mGo4'
 ---
 ## hello.c Program
 Before anything else let me tell you what this hello.c file contains so that it won't act as a mystery for you folks while we dive deeper into the inner workings of compilation.

@@ -1,33 +1,268 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title="About Me | Raj's Blog" description="About Albert Wesker and more." />
+		<BaseHead
+			title="About | Raj's Blog"
+			description="You came here to learn about me. Predictable."
+		/>
 	</head>
 	<body>
 		<div class="site-container">
 			<Header />
 			<main>
-				<div class="box">
-					<h1>Welcome to the about page!</h1>
-					<p>
-						Albert Wesker[a] is a character in the Resident Evil survival horror video game series created by the Japanese company Capcom. He was first introduced in the original Resident Evil (1996) as the captain of the Special Tactics and Rescue Service (S.T.A.R.S.) unit of the Raccoon Police Department. Wesker has been one of the series' main antagonists as a member of the pharmaceutical conglomerate Umbrella Corporation, the primary antagonistic faction, manipulating story events behind the scenes. To further his own plans, Wesker betrays his allies, fakes his death, gains superhuman abilities, and works with both Umbrella's mysterious rival company and their successors in the field of biological weapons development until his ultimate defeat by Chris Redfield and Sheva Alomar in Resident Evil 5 (2009).
-					</p>
-					<p>
-						Wesker appears in several Resident Evil games, novelizations, and films and has also appeared in other game franchises, including Marvel vs. Capcom, Teppen, and Dead by Daylight. In his first appearance, Wesker was voiced by Pablo Kuntz, while D. C. Douglas voiced the character across most of his other appearances; in Japanese dubbings, Jouji Nakata has consistently voiced the character across all of his video game appearances. Several actors have portrayed Wesker, including Jason O'Mara, Shawn Roberts, Tom Hopper, and Lance Reddick, in the live-action Resident Evil films and television series.
-					</p>
-					<p>
-						Wesker was conceptualized by writer Kenichi Iwao, who envisioned Wesker as an arrogant, intelligent, and unsympathetic character. Wesker is presented as a virologist focused on advancing human evolution and later becomes a bio-terrorist obsessed with eradicating humanity. He possesses superhuman strength, speed, stamina, and regeneration, and he mutates into a more powerful form in Resident Evil 5. Wesker has received mostly positive reviews from video game publications, with critics praising him for being one of the most memorable video game villains, particularly his death, but critiquing him for appearing as a one-dimensional and stereotypical villain.
-					</p>
+				<div class="about-hero">
+					<div class="about-image-wrap">
+						<img
+							src="https://upload.wikimedia.org/wikipedia/en/5/51/Albert_Wesker.png"
+							alt="Albert Wesker"
+							class="wesker-img"
+						/>
+					</div>
+					<div class="about-intro">
+						<p class="about-label">WHO AM I</p>
+						<h1>Albert Wesker.</h1>
+						<p class="about-tagline">
+							Virologist. Strategist. The next step in human
+							evolution.
+						</p>
+					</div>
+				</div>
+
+				<div class="about-body">
+					<div class="about-content">
+						<h2>You came here looking for answers.</h2>
+						<p>
+							How <em>predictable</em>. I have no interest in
+							explaining myself to you — and yet, since you've
+							made the effort to find this page, I'll indulge your
+							curiosity. Briefly.
+						</p>
+
+						<p>
+							I was once a captain of S.T.A.R.S., Raccoon City's
+							elite response unit. A position I held not out of
+							loyalty — loyalty is a leash for lesser minds — but
+							because it served my purpose. Every operative I
+							commanded, every mission I oversaw, was a step in a
+							larger design you could never have comprehended. I
+							have always been the most capable person in any
+							room. I simply don't bother announcing it.
+						</p>
+
+						<p>
+							My field is virology. My obsession is evolution.
+							Humanity, in its current form, is a dead end — a
+							species of comfortable mediocrity, too afraid to
+							reach for what it could become. I intend to correct
+							that. With science. With will. With <em>power</em> that
+							most people only read about in myths.
+						</p>
+
+						<h2>On this blog.</h2>
+						<p>
+							I write here because ideas deserve proper vessels. I
+							document my thinking on systems, technology, and the
+							architecture of complex things — biological,
+							digital, or otherwise. If you find the content
+							difficult, that is not my problem. I write for those
+							who can keep up.
+						</p>
+
+						<p>
+							I won't pretend this is a personal journal. It
+							isn't. Every post is deliberate. Every word is
+							chosen. I do not waste time, and I suggest you don't
+							waste mine by expecting anything less.
+						</p>
+
+						<h2>A word of warning.</h2>
+						<p>
+							Chris Redfield once thought he could stop me. Jill
+							Valentine. The entirety of the BSAA. They were wrong
+							— until they weren't. Even I concede that outcome.
+							But understand this: what I represent does not end
+							with me. The idea of breaking the ceiling of human
+							potential, of engineering something <em>greater</em> —
+							that is not a plan you can shoot down in a volcano.
+						</p>
+
+						<p>
+							Read the articles. Think carefully. And try not to
+							embarrass yourself in the comments.
+						</p>
+
+						<p class="wesker-sign">— A.W.</p>
+					</div>
 				</div>
 			</main>
 			<Footer />
 		</div>
 	</body>
 </html>
+
+<style>
+	/* ── About Hero ──────────────────────────────── */
+	.about-hero {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		min-height: 340px;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.about-image-wrap {
+		background-color: #0e0e0e;
+		overflow: hidden;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		padding: 0;
+	}
+
+	.wesker-img {
+		width: 100%;
+		max-height: 380px;
+		object-fit: contain;
+		object-position: bottom center;
+		display: block;
+	}
+
+	.about-intro {
+		padding: 2.5rem 2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		border-left: 1px solid var(--border-color);
+	}
+
+	.about-label {
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.15em;
+		color: var(--accent);
+		text-transform: uppercase;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.about-intro h1 {
+		font-size: 3rem;
+		margin: 0 0 0.75rem 0;
+		color: #ffffff;
+	}
+
+	.about-tagline {
+		font-size: 1rem;
+		color: rgb(var(--gray));
+		margin: 0;
+		font-style: italic;
+		line-height: 1.5;
+	}
+
+	/* ── About Body ──────────────────────────────── */
+	.about-body {
+		padding: 3rem 2rem;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.about-content {
+		max-width: 720px;
+	}
+
+	.about-content h2 {
+		font-size: 1.5rem;
+		color: var(--accent);
+		margin: 2rem 0 0.75rem 0;
+	}
+
+	.about-content h2:first-child {
+		margin-top: 0;
+	}
+
+	.about-content p {
+		color: rgb(var(--gray-dark));
+		line-height: 1.8;
+	}
+
+	.about-content em {
+		color: var(--accent);
+		font-style: normal;
+		font-weight: 700;
+	}
+
+	.wesker-sign {
+		margin-top: 2.5rem;
+		font-size: 1.1rem;
+		font-weight: 700;
+		color: var(--accent) !important;
+		letter-spacing: 0.05em;
+	}
+
+	/* ── Tablet (≤ 900px) ── */
+	@media (max-width: 900px) {
+		.about-hero {
+			grid-template-columns: 1fr 2fr;
+			min-height: 280px;
+		}
+
+		.wesker-img {
+			max-height: 320px;
+		}
+	}
+
+	/* ── Mobile (≤ 600px) ── */
+	@media (max-width: 600px) {
+		.about-hero {
+			grid-template-columns: 1fr;
+		}
+
+		.about-image-wrap {
+			/* On mobile show a cropped face/bust from the PNG */
+			min-height: 220px;
+			max-height: 260px;
+			align-items: center;
+		}
+
+		.wesker-img {
+			width: auto;
+			max-width: 100%;
+			max-height: 260px;
+			object-fit: contain;
+			object-position: top center;
+		}
+
+		.about-intro {
+			border-left: none;
+			border-top: 1px solid var(--border-color);
+			padding: 1.5rem 1rem;
+		}
+
+		.about-intro h1 {
+			font-size: 2rem;
+		}
+
+		.about-body {
+			padding: 2rem 1rem;
+		}
+	}
+
+	/* ── Small phones (≤ 400px) ── */
+	@media (max-width: 400px) {
+		.about-image-wrap {
+			min-height: 180px;
+			max-height: 200px;
+		}
+
+		.wesker-img {
+			max-height: 200px;
+		}
+
+		.about-intro h1 {
+			font-size: 1.6rem;
+		}
+	}
+</style>

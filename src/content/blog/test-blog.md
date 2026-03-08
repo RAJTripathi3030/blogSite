@@ -36,7 +36,7 @@ The following image will help you a lot in order to understand what is the actua
 ### 1. Preprocessor(cpp) : `hello.c -> hello.i`
 As you can see in the hello.c program above, the first thing we do is that we include a header file in the code. Now when we go ahead to compile this program we have to know the contents of the header file which we just included otherwise what's even the point of including it in the first place right?
 
-This exact task is done by the proprocessor. It goes and loads the content of the header file on top of the hello.c file so that before anything else, the processor has access to the code of the header file and it doesn't have to perform lookups on its behalf.
+This exact task is done by the proprocessor. It goes and loads the content of the header file on top of the hello.c file.
 
 The result is a modified file with `.i` extension so now we have `hello.i`.
 
@@ -45,13 +45,11 @@ The task of the compiler is to translate the contents of `hello.i` file to `hell
 
 ![Assembly-Language Program](image-2.png)
 
-The instructions from line 2 to line 7 are low-level `machine instruction` in textual form.
-
 Assembly-Language is usefull because it provides a common output language for different compilers.
 For Example : The compilers of C and Fortran, both generate output files in the same assembly language.
 
 ### 3. Assembler(as) : `hello.s -> hello.o`
-Next the assembler(as) converts the `hello.s` file to `hello.o` file which contains the low level machine-language instructions. It packages them in a form known as `Relocatable Object Program` and stores the result in an object file called `hello.o`. This file is a binary file containing 17 bytes to represent the main() function.
+Next the assembler(as) converts the `hello.s` file to `hello.o` file which contains the low level machine-language instructions. It packages them in a form known as `Relocatable Object Program` and stores the result in an object file called `hello.o`. This file is a binary file typically containing 17 bytes to represent the main() function but this size depends on various parameters such as the architecture of the system, the level of optimization, the compiler being used.
 
 ### 4. Linker(ld) : `hello.o -> hello`
 Notice that our hello program calls the printf function, which is part of the standard C library provided by every C compiler. The printf function resides in a separate precompiled object file called `printf.o`, which must somehow be merged with our hello.o program. The `linker (ld) handles this merging`. 

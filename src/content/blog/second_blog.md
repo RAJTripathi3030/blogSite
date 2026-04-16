@@ -2,7 +2,7 @@
 title: 'Why CPU and GPU Give Different Results in PyTorch: A Deep Dive'
 description: 'Here I tell you guys what I found out and learned in my first contribution to pytorch'
 pubDate: 'Apr 15 2026'
-heroImage: 'https://images.unsplash.com/photo-1741392078467-a2d39da36f2d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzJ8fGdwdXxlbnwwfHwwfHx8MA%3D%3D'
+heroImage: 'https://plus.unsplash.com/premium_vector-1689096681982-90b7223712d0?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 ---
 # I Tried Contributing to PyTorch on Day 1. Here's What Happened.
 

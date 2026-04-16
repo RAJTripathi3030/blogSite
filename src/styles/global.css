@@ -2,7 +2,8 @@
   Guardian-style dark theme for blog site.
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Guardian+Egyp+Web&family=Inter:wght@400;700;900&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;700;900&display=swap');*/
+/*@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700;900&family=DM+Mono:wght@400;500&display=swap');*/
 
 :root {
 	--accent: #f3c900;
@@ -54,7 +55,7 @@ body {
 }
 
 body {
-	font-family: "Inter", "Atkinson", sans-serif;
+    font-family: "DM Sans", "Inter", "Atkinson", sans-serif;
 	text-align: left;
 	background-color: var(--bg-dark);
 	word-wrap: break-word;
@@ -257,6 +258,7 @@ img {
 	height: auto;
 	border-radius: 0;
 	display: block;
+	/*border: 1px solid var(--border-color);*/
 }
 
 /* ── Code ────────────────────────────────────────── */
@@ -266,6 +268,7 @@ code {
 	border-radius: 2px;
 	color: var(--accent);
 	font-size: 0.9em;
+	font-family: 'DM Mono', monospace;
 }
 
 pre {

@@ -2,7 +2,7 @@
 title: 'Basic Linear Algebra Subprograms (BLAS)'
 description: 'Here in this log we will go through what BLAS is and inside it what is GEMM and how we observe and measure low-level optimizations for performance for various subroutines'
 pubDate: 'Jun 27 2026'
-heroImage: https://images.unsplash.com/photo-1600348712270-5af9e3590f66?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHByb2Nlc3NvcnxlbnwwfHwwfHx8MA%3D%3D
+heroImage: https://images.unsplash.com/photo-1707083639439-f0aba3ef545b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c3BlZWR8ZW58MHx8MHx8fDA%3D
 ---
 
 ## What is BLAS?

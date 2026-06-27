@@ -165,7 +165,7 @@ This is a **spatial locality violation** meaning we are not using the data we br
 
 Two things we fix in the next kernel.
 
-**Fix level 1: Loop reorder to ikj.**
+#### Fix level 1: Loop reorder to ikj.
 
 Swap the j and k loops. Now the inner loop variable is j. Let's check all three accesses:
 
@@ -179,7 +179,33 @@ B[k*N + j]  →  j increments column  →  +1 address, hence sequential
 
 All three accesses are either sequential or fixed. No strided jumps inside the hot inner loop. The compiler also recognizes that `A[i*K + k]` is constant across the entire j loop and hoists it into a register, so the inner loop becomes a scalar multiplied against a sequential row of B, added into a sequential row of C. `This is the ideal pattern for the CPU's prefetcher and for SIMD vectorization.`
 
-**Fix level 2: Padding the leading dimension.**
+```c
+void sgemm_ikj_padded(const float *A, const float *B, float *C,
+                        devblas_gemm_config_t *config) {
+
+    int M = config->M;
+    int N = config->N;
+    int K = config->K;
+
+    int lda = config->lda;
+    int ldb = config->ldb;
+    int ldc = config->ldc;
+
+    for(int i = 0; i < M; i++) {
+        for(int k = 0; k < K; k++) {
+            for(int j = 0; j < N; j++) {
+                C[i*ldc + j] += A[i*lda + k] * B[k*ldb + j];
+            }
+        }
+    }
+}
+```
+
+**Performance of ikj loop reorder**
+
+![ikj reorder](/public/ikj_benchmark.png)
+
+#### Fix level 2: Padding the leading dimension.
 Before discussing leading dimensions, let's briefly touch on cache placement policies.
 
 When the CPU fetches data from main memory, it needs to store it in the L1 cache for faster future access. But it cannot just place it anywhere. If data could go anywhere (a fully associative cache), the CPU would have to search the entire cache to find it again, which is extremely inefficient and slow for the hardware.

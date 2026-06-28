@@ -11,7 +11,7 @@ To simply put it out there, tiling is a divide and conquer technique where you d
 
 This is better in terms of performance because with tiling what you have achieved is a smaller problem space to work with. The matrix is divided so there is less data that you have to load in L1 cache which directly means that you have more space left in the cache for other data as well.
 
-Now, let's first understand what are the various types of tiling as well.
+Now, let's understand what are the various types of tiling.
 
 ### Types of Tiling
 

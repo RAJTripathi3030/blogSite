@@ -15,18 +15,6 @@ Now before we dive deep and I show you the code, let's first understand what are
 
 ### Types of Tiling
 
-#### Macro Tiling
-
-Macro tiling is you utilizing the cache locality by dividing your matrix into sub tiles and then loading them in cache to perform computations.
-
-#### Micro Tiling
-
-Micro tiling is you utiling the registers, which are more closer to the CPU and hence provide a faster read/write access, and you load the data from the matrix into the registers to furthermore optimize the computation.
-
-Now what these are and how they work, we will discuss in detail through code.
-
----
-
 ### Macro Tiling
 
 Macro tiling is `utilizing cache locality` by dividing your matrix into sub-tiles and then loading them into the cache to perform computations.

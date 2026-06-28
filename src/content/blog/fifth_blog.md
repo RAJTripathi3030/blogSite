@@ -71,6 +71,8 @@ Such that the inner loops won't go beyond these limits.
 
 These are the three nested loops that actually iterate through the specific elements inside the tiles of matrices A, B, and C selected by the outer loops. We access these memory locations using the ii, jj, and kk indices.
 
+#### Benchmark Results of i-j-k Loop Tiling
+![i-j-k Loop Tiling](/public/i-j-k_padded.png)
 
 ### Edge Tiling
 
@@ -191,6 +193,9 @@ C[ii * ldc + jj] = c_acc; // Writing back to memory only once
 
 Just like that, we eliminated a massive amount of redundant read/write traffic to the L1 cache.
 
+#### Benchmark Results of Single Register Accumulator
+![Single Register Accumulator](/public/single_accu.png)
+
 #### Level 2: 2D Register Blocking
 
 But why stop at one register? Modern CPUs have many architectural registers (for instance, ARM has 32 vector registers, and x86 AVX-512 has 32 massive 512-bit registers).
@@ -228,6 +233,9 @@ C[(ii+1)*ldc + jj+1] = c11;
 ```
 
 By doing this, we maximize our arithmetic intensity. We load a few elements of A and B, but we reuse them multiple times across our grid of accumulators before they leave the registers.
+
+#### Benchmark Results of Register Blocking
+![Register Blocking](/public/multiple_accu.png)
 
 #### Panel Packing: Feeding the Registers efficiently
 

@@ -1,163 +1,281 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+// Group by year for timeline-style listing
+const postsByYear = posts.reduce(
+  (acc, post) => {
+    const year = post.data.pubDate.getFullYear();
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(post);
+    return acc;
+  },
+  {} as Record<number, typeof posts>,
+);
+
+const years = Object.keys(postsByYear)
+  .map(Number)
+  .sort((a, b) => b - a);
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<div class="site-container">
-			<Header />
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <div class="site-container">
+      <Header />
 
-			<main>
-				<!-- Hero Section -->
-				<div class="grid hero-grid">
-					<div class="box hero-text">
-						<h1>
-							<span
-								style="background: linear-gradient(135deg, #FF2D2D, #C0001A); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
-								>7 minutes...7 minutes is all I can spare to
-								play with you.</span
-							>
-							<span
-								style="background: linear-gradient(135deg, #B00020, #5C0010); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
-								>Here I am giving you my precious time, and you
-								waste it by walking around.</span
-							>
-						</h1>
-					</div>
+      <main>
+        <!-- ── Site intro ──────────────────────── -->
+        <section class="site-intro">
+          <h1 class="intro-headline">
+            Writing on systems,<br />technology &amp; ideas.
+          </h1>
+        </section>
 
-					<div class="box hero-image-box">
-						<img
-							src="https://upload.wikimedia.org/wikipedia/en/5/51/Albert_Wesker.png"
-							alt="wesker"
-							class="hero-img"
-						/>
-					</div>
-				</div>
+        <!-- ── Post list ───────────────────────── -->
+        <div class="post-list">
+          {years.map((year) => (
+            <div class="year-group">
+              <div class="year-marker">
+                <span class="year-label">{year}</span>
+              </div>
+              <ul role="list" class="year-posts">
+                {postsByYear[year].map((post) => (
+                  <li class="post-item">
+                    <a href={`/blog/${post.id}/`} class="post-row">
+                      <time class="post-date" datetime={post.data.pubDate.toISOString()}>
+                        <FormattedDate date={post.data.pubDate} />
+                      </time>
+                      <div class="post-body">
+                        <span class="post-title">{post.data.title}</span>
+                        {post.data.description && (
+                          <span class="post-desc">{post.data.description}</span>
+                        )}
+                      </div>
+                      <span class="post-arrow" aria-hidden="true">→</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </main>
 
-				<!-- Second Section -->
-				<div class="grid second-grid">
-					<div class="box">
-						<h1>Here are some of my thoughts...</h1>
-					</div>
-
-					<div class="feature-grid">
-						<div class="feature-card">
-							<h3>Writing to think</h3>
-							<p>
-								I write to untangle complex ideas and make sense
-								of the world around me.
-							</p>
-						</div>
-						<div class="feature-card">
-							<h3>Building in the open</h3>
-							<p>
-								Check out my <a
-									href="https://www.github.com/RAJTripathi3030/"
-									>GitHub</a
-								> to see what I've been building.
-							</p>
-						</div>
-						<div class="feature-card">
-							<h3>Moving fast</h3>
-							<p>
-								I believe in shipping, iterating, and learning
-								by doing rather than planning forever.
-							</p>
-						</div>
-						<div class="feature-card">
-							<h3>Using the best tool</h3>
-							<p>
-								I pick the right stack for the problem — no
-								dogma, just pragmatism.
-							</p>
-						</div>
-					</div>
-				</div>
-			</main>
-
-			<Footer />
-		</div>
-	</body>
+      <Footer />
+    </div>
+  </body>
 </html>
 
 <style>
-	.hero-grid {
-		min-height: 280px;
-	}
+  /* ── Site intro ───────────────────────────── */
+  .site-intro {
+    padding: 3.5rem 2.5rem;
+    border-bottom: 1px solid var(--hairline);
+  }
 
-	.hero-text {
-		display: flex;
-		align-items: center;
-	}
+  .intro-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin: 0;
+  }
 
-	.hero-image-box {
-		padding: 0;
-		overflow: hidden;
-		background-color: #0e0e0e;
-	}
+  /* ── Post list ────────────────────────────── */
+  .post-list {
+    display: flex;
+    flex-direction: column;
+  }
 
-	.hero-img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		object-position: top center;
-		border-radius: 0;
-		display: block;
-	}
+  /* ── Year group ───────────────────────────── */
+  .year-group {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    border-bottom: 1px solid var(--hairline);
+  }
 
-	.second-grid {
-		border-top: 1px solid var(--border-color);
-		grid-template-columns: 1fr 1fr;
-	}
+  .year-marker {
+    padding: 2rem 0 2rem 2.5rem;
+    border-right: 1px solid var(--hairline);
+    display: flex;
+    align-items: flex-start;
+    position: sticky;
+    top: 0;
+  }
 
-	.second-grid .box {
-		display: flex;
-		align-items: center;
-	}
+  .year-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    writing-mode: horizontal-tb;
+  }
 
-	/* ── Tablet (≤ 900px) ── */
-	@media (max-width: 900px) {
-		.hero-image-box {
-			max-height: 360px;
-		}
-		.hero-img {
-			object-fit: contain;
-			height: 360px;
-		}
+  .year-posts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
-		.second-grid {
-			grid-template-columns: 1fr;
-		}
-	}
+  /* ── Individual post row ──────────────────── */
+  .post-item {
+    border-bottom: 1px solid var(--hairline);
+  }
 
-	/* ── Mobile (≤ 600px) ── */
-	@media (max-width: 600px) {
-		.hero-grid {
-			min-height: unset;
-		}
+  .post-item:last-child {
+    border-bottom: none;
+  }
 
-		.hero-text {
-			padding: 1.25rem 1rem;
-		}
+  .post-row {
+    display: grid;
+    grid-template-columns: 8rem 1fr 2rem;
+    align-items: start;
+    gap: 1.25rem;
+    padding: 1.5rem 2rem 1.5rem 2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.12s ease;
+    position: relative;
+  }
 
-		.hero-image-box {
-			max-height: 320px;
-		}
-		.hero-img {
-			object-fit: contain;
-			object-position: top center;
-			height: 320px;
-		}
+  .post-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--coral);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.2s ease;
+  }
 
-		.second-grid {
-			grid-template-columns: 1fr;
-		}
-	}
+  .post-row:hover {
+    background-color: var(--soft-stone);
+  }
+
+  .post-row:hover::before {
+    transform: scaleY(1);
+  }
+
+  .post-date {
+    font-size: 0.775rem;
+    color: var(--muted);
+    font-weight: 500;
+    padding-top: 0.225rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .post-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+  }
+
+  .post-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    transition: color 0.12s;
+  }
+
+  .post-row:hover .post-title {
+    color: var(--primary);
+  }
+
+  .post-desc {
+    font-size: 0.875rem;
+    color: var(--body-muted);
+    line-height: 1.55;
+  }
+
+  .post-arrow {
+    font-size: 0.9rem;
+    color: var(--hairline);
+    align-self: center;
+    justify-self: end;
+    transition: color 0.12s, transform 0.15s ease;
+  }
+
+  .post-row:hover .post-arrow {
+    color: var(--coral);
+    transform: translateX(4px);
+  }
+
+  /* ── Responsive ───────────────────────────── */
+  @media (max-width: 768px) {
+    .site-intro {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .year-group {
+      grid-template-columns: 1fr;
+    }
+
+    .year-marker {
+      padding: 1rem 1.5rem 0.5rem;
+      border-right: none;
+      border-bottom: 1px solid var(--hairline);
+      position: static;
+    }
+
+    .post-row {
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      padding: 1.25rem 1.5rem;
+      gap: 0.25rem 1rem;
+    }
+
+    .post-date {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .post-body {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .post-arrow {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .site-intro {
+      padding: 2rem 1rem;
+    }
+
+    .year-marker {
+      padding: 1rem;
+    }
+
+    .post-row {
+      padding: 1.25rem 1rem;
+    }
+  }
 </style>

@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
@@ -8,127 +7,199 @@ import Header from "../components/Header.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate } = Astro.props;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
 
-	<body>
-		<div class="site-container">
-			<Header />
-			<main>
-				<article>
-					<div class="hero-image">
-						{
-							heroImage && (
-								<Image
-									width={1020}
-									height={510}
-									src={heroImage}
-									alt=""
-								/>
-							)
-						}
-					</div>
-					<div class="prose">
-						<div class="title">
-							<div class="date">
-								<FormattedDate date={pubDate} />
-								{
-									updatedDate && (
-										<div class="last-updated-on">
-											Last updated on{" "}
-											<FormattedDate date={updatedDate} />
-										</div>
-									)
-								}
-							</div>
-							<h1>{title}</h1>
-							<hr />
-						</div>
-						<slot />
-					</div>
-				</article>
-			</main>
-			<Footer />
-		</div>
-	</body>
+  <body>
+    <div class="site-container">
+      <Header />
+      <main>
+        <article>
+          <!-- Back link -->
+          <div class="post-nav">
+            <a href="/" class="back-link">← All posts</a>
+          </div>
+
+          <!-- Post header -->
+          <header class="post-header">
+            <p class="post-label">
+              <FormattedDate date={pubDate} />
+              {updatedDate && (
+                <span class="updated-on">
+                  &nbsp;· Updated <FormattedDate date={updatedDate} />
+                </span>
+              )}
+            </p>
+            <h1 class="post-title">{title}</h1>
+            {description && <p class="post-desc">{description}</p>}
+            <hr class="post-rule" />
+          </header>
+
+          <!-- Article prose -->
+          <div class="prose">
+            <slot />
+          </div>
+        </article>
+      </main>
+      <Footer />
+    </div>
+  </body>
 </html>
 
 <style>
-	main {
-		width: 100%;
-		max-width: 100%;
-		margin: 0;
-		padding: 0;
-	}
-	.hero-image {
-		width: 760px;
-		max-width: calc(100% - 4rem);
-		margin: 2rem auto 0;
-	}
-	.hero-image img {
-		display: block;
-		width: 100%;
-		max-height: 420px;
-		object-fit: cover;
-		border-radius: 8px;
-		box-shadow: var(--box-shadow);
-	}
-	.prose {
-		width: 760px;
-		max-width: calc(100% - 4rem);
-		margin: auto;
-		padding: 2rem 0;
-		color: rgb(var(--gray-dark));
-		background-color: var(--bg-dark);
-	}
+  main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-	/* Tablet */
-	@media (max-width: 900px) {
-		.hero-image,
-		.prose {
-			max-width: calc(100% - 3rem);
-		}
-	}
+  /* ── Back nav ─────────────────────────────── */
+  .post-nav {
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid var(--hairline);
+  }
 
-	/* Mobile */
-	@media (max-width: 600px) {
-		.hero-image {
-			max-width: calc(100% - 1.5rem);
-			margin: 1rem auto 0;
-		}
-		.hero-image img {
-			max-height: 200px;
-			border-radius: 4px;
-		}
-		.prose {
-			max-width: calc(100% - 1.5rem);
-			padding: 1.25rem 0;
-		}
-		.title {
-			margin-bottom: 1em;
-			padding: 0.75em 0;
-		}
-	}
-	.title {
-		margin-bottom: 1.5em;
-		padding: 1em 0;
-		line-height: 1;
-	}
-	.title h1 {
-		margin: 0 0 0.5em 0;
-		color: #ffffff;
-	}
-	.date {
-		margin-bottom: 0.75em;
-		color: rgb(var(--gray));
-		font-size: 0.9rem;
-	}
-	.last-updated-on {
-		font-style: italic;
-	}
+  .back-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.12s;
+  }
+
+  .back-link:hover {
+    color: var(--ink);
+  }
+
+  /* ── Post header ──────────────────────────── */
+  .post-header {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 2rem 0;
+  }
+
+  .post-label {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin: 0 0 1rem 0;
+  }
+
+  .updated-on {
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: 0.72rem;
+  }
+
+  .post-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin: 0 0 1rem 0;
+  }
+
+  .post-desc {
+    font-size: 1.1rem;
+    color: var(--body-muted);
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .post-rule {
+    border: none;
+    border-top: 1px solid var(--hairline);
+    margin: 1.5rem 0 0;
+  }
+
+  /* ── Prose content ────────────────────────── */
+  .prose {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 4rem;
+    color: var(--ink);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .prose :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2.5rem 0 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .prose :global(h3) {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 2rem 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .prose :global(a) {
+    color: var(--action-blue);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose :global(a:hover) {
+    color: var(--primary);
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--coral);
+    margin: 1.5rem 0;
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    color: var(--body-muted);
+    font-size: 1.05rem;
+  }
+
+  .prose :global(img) {
+    border-radius: var(--r-sm);
+    margin: 1.5rem 0;
+  }
+
+  /* ── Responsive ───────────────────────────── */
+  @media (max-width: 900px) {
+    .post-header,
+    .hero-image,
+    .prose {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .post-nav {
+      padding: 1rem;
+    }
+
+    .post-header {
+      padding: 2rem 1rem 0;
+    }
+
+    .hero-image,
+    .prose {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .prose {
+      padding-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+  }
 </style>

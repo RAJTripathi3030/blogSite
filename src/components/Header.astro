@@ -1,12 +1,13 @@
 ---
 import { SITE_TITLE } from "../consts";
-
-const pathname = Astro.url.pathname;
 ---
 
 <nav class="navbar">
-	<a class:list={["page-link", { active: pathname === "/" || pathname === "" }]} href="/">Home</a>
-	<a class:list={["page-link", { active: pathname.startsWith("/blog") }]} href="/blog">Blog</a>
-	<a class:list={["page-link", { active: pathname === "/about" }]} href="/about">About</a>
-	<a class="page-link" href="https://www.github.com/RAJTripathi3030/" target="_blank" rel="noopener noreferrer">GitHub</a>
+  <a class="navbar-brand" href="/">{SITE_TITLE}</a>
+  <a
+    class="page-link nav-pill"
+    href="https://www.github.com/RAJTripathi3030/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >GitHub ↗</a>
 </nav>

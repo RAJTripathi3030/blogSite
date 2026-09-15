@@ -3,5 +3,17 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} Raj. All rights reserved.
+  <span>© {today.getFullYear()} Raj. All rights reserved.</span>
+  <nav class="footer-links">
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="https://www.github.com/RAJTripathi3030/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+  </nav>
 </footer>
+
+<style>
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+</style>
